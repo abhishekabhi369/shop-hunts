@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Newsearch.css";
 import Home from "./Home";
+import { Link } from 'react-router-dom'
+import { FaRegUser } from "react-icons/fa";
+import { Button } from "react-bootstrap";
+import { RiLogoutBoxLine } from "react-icons/ri";
 function Newsearch() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const borderStyle = {
     border: "1px solid #C75DEB",
     // You can add more styles here if needed
   };
   return (
-    <div>
+    <div >
       <div className="video-bg">
         <video width="320" height="240" autoPlay muted loop>
           <source
@@ -25,13 +30,12 @@ function Newsearch() {
               <div className="search-bar">
                 <input type="text" placeholder="Search" />
               </div>
-              <div className="header-profile">
+              <div className="header-profile ">
                 <div className="notification">
                   <span
                     className="notification-number"
                     style={{ color: "white" }}
-                  >
-                    3
+                  > 
                   </span>
                   <svg
                     viewBox="0 0 24 24"
@@ -45,12 +49,9 @@ function Newsearch() {
                     <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
                   </svg>
                 </div>
-                <img
-                  className="profile-img"
-                  src="https://images.unsplash.com/photo-1600353068440-6361ef3a86e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                  alt=""
-                />
+         <Link to={'/signin'}>  <div className="profile-img"><FaRegUser /></div> </Link> 
               </div>
+              <div className="Log-out"><RiLogoutBoxLine color="white"/></div>
             </div>
             <div className="wrapper">
               <div className="main-container">

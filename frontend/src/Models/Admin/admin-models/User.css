@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .text-1{
+    background-color: rgba(0, 0, 0, 0.661);
+   font-weight: bold;
+  }
+  .main-div{
+    background-image: url("https://cdn1.vectorstock.com/i/1000x1000/13/40/todo-list-seamless-pattern-universal-background-vector-7561340.jpg");
+    padding-bottom: 5em;
+  }
+  
+  .btn-add{
+    padding-left:  4em;
+    padding-right:  4em;
+    text-align: center;
+    font-weight: bold;
+  }
+  .input-text{
+  
+  }

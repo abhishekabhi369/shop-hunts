@@ -1,0 +1,30 @@
+.main-side {
+    display: flex;
+    /* align-items: flex-start; */
+    
+  }
+.sidebar{
+    width: max-content;
+    height: 100vh;
+    position: fixed;
+    padding-right: 1em;
+}
+.items >div{
+  
+    cursor: pointer;
+    transition: ease-in-out .3s;
+}
+.admin-text h1{
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:white;
+    margin-bottom: 1em;
+}
+.items >div:hover{
+    background-color: white;
+    color:black
+}
+.content{
+    position: relative;
+    left: 50%;
+}

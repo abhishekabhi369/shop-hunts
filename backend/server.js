@@ -1,14 +1,17 @@
 const express=require('express');
-const bodyParser = require('body-parser')
-// const router = require('./Router/TestRouter');
-// const connection = require('./Controller/Mongo');
+const bodyParser = require('body-parser');
+const connection = require('./mongo-config/mongo');
+const router = require('./Routes/TestRoutes');
+const cors=require('cors')
 const app=express()
 const port=4001;
-// connection()
+connection()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.use('/',router)
 app.use(express.json())
+app.use(cors())
+app.use('/',router)
+
 app.get('/',(req,res)=>
 {
     res.send("Welcome")
