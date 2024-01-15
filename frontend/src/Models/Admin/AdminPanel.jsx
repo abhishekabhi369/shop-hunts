@@ -1,58 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Admin.css';
 import User from './admin-models/User';
+import Dashboard from './admin-models/Dashboard';
+import Stores from './admin-models/Store'
+import { Container } from 'react-bootstrap';
+
 
 function AdminPanel() {
-  const [selectedTab, setSelectedTab] = useState('Dashboard');
-
-  const handleTabClick = (tabName) => {
-    setSelectedTab(tabName);
-  };
-
-  const renderContent = () => {
-    switch (selectedTab) {
-      case 'Dashboard':
-        return (
-          <div className="dashboard-content">
-            {/* Content for Dashboard */}
-            <h2>Dashboard Content</h2>
-          </div>
-        );
-      case 'User':
-        return (
-          <div className="user-content">
-            {/* Content for User */}
-          <User/>
-          </div>
-        );
-      case 'Store':
-        return (
-          <div className="store-content">
-            {/* Content for Store */}
-            <h2>Store Content</h2>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
+  const [dashboard, setdashboard] = useState(true);
+  const [user,setuser]=useState(false)
+  const [store,setstore]=useState(false)
+  const createdashboard=()=>{
+    setdashboard(true)
+    setuser(false)
+    setstore(false)
+  }
+  const createuser=()=>{
+    setdashboard(false)
+    setstore(false)
+    setuser(true)
+  }
+  const createstore=()=>{
+    setdashboard(false)
+    setstore(true)
+    setuser(false)
+  }
   return (
-    <div className='bg-white main-side d-flex'>
-      <div className="sidebar bg-black">
-        <div className='admin-text'>
-          <h1>Admin Panel</h1>
+    <div className=''>
+      <Container fluid style={{paddingLeft:"0",paddingRight:"0"}}>
+      <div className='admin-text bg-black  text-center  '>
+          <h1 className='text-white' style={{marginBottom: "0"}}>Admin Panel</h1>
+         
         </div>
-        <div className='items text-white'>
-          <div onClick={() => handleTabClick('Dashboard')}><h4>DashBoard</h4></div>
-          <div onClick={() => handleTabClick('User')}> <h4>User</h4></div>
-          <div onClick={() => handleTabClick('Store')}><h4>Store</h4></div>
-          <div onClick={() => handleTabClick(null)}><h4>Logout</h4></div>
+        <div className='items bg-black '>
+          <div className='dashboard' onClick={createdashboard}><h4>DashBoard</h4></div>
+          <div className='User' onClick={createuser}> <h4>User</h4></div>
+          <div className='Store' onClick={createstore}><h4>Store</h4></div>
+          <div ><h4>Logout</h4></div>
         </div>
-      </div>
       <div className="content">
-        {renderContent()}
+          {
+            dashboard ? <Dashboard/> : ''
+          }
+          {
+            user ? <User/>: ''
+          }
+          {
+            store ? <Stores/>:''
+          }
       </div>
+      </Container>
     </div>
   );
 }

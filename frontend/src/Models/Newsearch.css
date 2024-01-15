@@ -27,57 +27,7 @@
     -webkit-font-smoothing: antialiased;
    }
    
-   body {
-    font-family: var(--body-font);
-    background-image: url(https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg);
-    background-size: cover;
-    background-position: center;    
-    @media screen and (max-width: 480px) {
-     /* padding: 0.8em; */
-    }
-   }
-   
-   .video-bg {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    
-    video {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
-    }
-   }
   
- 
-   .main {
-    background-color: var(--theme-bg-color);
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    border-radius: 14px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    font-size: 15px;
-    font-weight: 500;
-   }
-   
-   .header {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    height: 58px;
-    width: 100%;
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 30px;
-    white-space: nowrap;
-   }
-   
    .menu-circle {
     width: 15px;
     height: 15px;
@@ -101,7 +51,6 @@
     input {
 
     margin-top: 0px;
-
      width: 100%;
      height: 100%;
      border: none;
@@ -140,30 +89,6 @@
     }
    }
    
-   .notification {
-    position: relative;
-    &-number {
-     position: absolute;
-     background-color: #3a6df0;
-     width: 16px;
-     height: 16px;
-     border-radius: 50%;
-     font-size: 10px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     color: #fff;
-     right: -6px;
-     top: -6px;
-    }
-    & + svg {
-     margin-left: 22px;
-     @media screen and (max-width: 945px) {
-      display: none;
-     }
-    }
-   }
-   
    .profile-img {
     padding-left: 2px;
     cursor: pointer;
@@ -172,67 +97,13 @@
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--theme-color);
-    margin-left: 22px;
+    /* margin-left: 22px; */
    }
-   
-   
-   .wrapper {
-    display: flex;
-    flex-grow: 1;
-    overflow: hidden;
-   }
-   
- 
-   .main-header {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    height: 58px;
-    flex-shrink: 0;
-   }
-   
-   .main-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-   }
-   
+   .Log-out{
+    padding-left: 2px;
+    cursor: pointer;
 
-   
-   .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    color: var(--theme-color);
-    padding: 20px 40px;
-    height: 100%;
-    overflow: auto;
-    background-color: var(--theme-bg-color);
-    @media screen and (max-width: 510px) {
-     padding: 20px;
-    }
-   
- 
    }
-   
-   .overlay-app {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
-    pointer-events: all;
-    background-color: rgba(36, 39, 59, 0.8);
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-    &.is-active {
-     visibility: visible;
-     opacity: 1;
-    }
-   }
-   
-
-   
    
    .content-button {
     background-color: #3a6df0;
@@ -255,6 +126,7 @@
    }
    
    .apps-card {
+    color: white;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -262,6 +134,7 @@
    }
    
    .app-card {
+    color: white;
     display: flex;
     flex-direction: column;
     width: calc(45.3% - 20px);
@@ -275,6 +148,7 @@
     &:hover {
      transform: scale(1.02);
      background-color: var(--theme-bg-color);
+     
     }
     svg {
      width: 28px;
@@ -320,9 +194,18 @@
    }
    .le-re{
     display: flex;
+    
 
 }
+.le{
+    flex-grow: 0;
+}
 .re{
-    flex-grow: 1;
+    flex-grow: 4;
     
 }
+@media screen and (max-width: 480px) {
+    .le-re{
+        display:block;
+    }
+   }

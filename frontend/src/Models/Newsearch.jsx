@@ -1,66 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Newsearch.css";
 import Home from "./Home";
 import { Link } from 'react-router-dom'
 import { FaRegUser } from "react-icons/fa";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import axios from "axios";
 function Newsearch() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [search, setsearch] = useState()
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [productName, setProductName] = useState('');
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    setIsLoggedIn(!!storedToken);
+    
+  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
+  };
+const searchProduct=async(event)=>{
+  if(isLoggedIn){
+    console.log(`Searching `);
+  
+    console.log(productName,"Input");
+    try {
+      
+      const response = await axios.get(`http://localhost:4001/products/${productName}`);                                                                                              
+
+      const searchResults = response.data;
+      console.log(searchResults                                                                                                                                                                                                                                                                                                                                                                                                                        );
+    } catch (error) {
+      console.error('Error during search:', error);                                                             
+    }
+  }
+  else{
+    setShowLoginModal(true);
+  }
+}
   const borderStyle = {
     border: "1px solid #C75DEB",
-    // You can add more styles here if needed
   };
   return (
-    <div >
-      <div className="video-bg">
-        <video width="320" height="240" autoPlay muted loop>
-          <source
-            src="https://assets.codepen.io/3364143/7btrrd.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+    <div  className="bg-black" >
+      
       <div className="le-re">
         <div className="le">
-          <div className="main">
-            <div className="header">
-              <div className="menu-circle"></div>
-              <div className="search-bar">
-                <input type="text" placeholder="Search" />
+        
+              <div className="Navbars d-flex">
+              <div className="menu-circle mt-4 "></div>
+              <div className="search-bar mt-3">
+                <input type="text" placeholder="Search"  onChange={(e) =>{ setProductName(e.target.value)
+                searchProduct()}} />
               </div>
-              <div className="header-profile ">
-                <div className="notification">
-                  <span
-                    className="notification-number"
-                    style={{ color: "white" }}
-                  > 
-                  </span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="feather feather-bell"
-                  >
-                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
-                  </svg>
-                </div>
-         <Link to={'/signin'}>  <div className="profile-img"><FaRegUser /></div> </Link> 
+             
+              <div className="header-profile mt-3">
+               
+                {isLoggedIn ? null : <Link to={'/signin'}> <div className="profile-img"><FaRegUser /></div> </Link>}
               </div>
-              <div className="Log-out"><RiLogoutBoxLine color="white"/></div>
+              {isLoggedIn ? <div className="Log-out text-white" onClick={handleLogout}><RiLogoutBoxLine color="white" />logout</div> : null}
             </div>
-            <div className="wrapper">
-              <div className="main-container">
-                <div className="content-wrapper">
-                  <div className="content-section"></div>
-                  <div className="content-section">
-                    <div className="content-section-title">
-                      Apps in your plan
+            <div className="content-section">
+                    <div className="content-section-title text-white text-center mb-3" >
+                   <h4>Stores Near You</h4> 
                     </div>
+                    <div className="stores-list d-flex flex-wrap">
                     <div className="apps-card">
                       <div className="app-card">
                         <span>
@@ -78,28 +83,36 @@ function Newsearch() {
                               />
                             </g>
                           </svg>
-                          After Effects
+                          <h6>Stores Name</h6>
                         </span>
-                        <div class="app-card__subtext">
-                          Industry Standart motion graphics & visual effects
+                        <div className="app-card__subtext d-flex ">
+                         <h6>Item Name-{`>`}</h6>  <h6>price</h6>
                         </div>
-                        <div class="app-card-buttons">
+                        <div className  ="app-card-buttons">
                           <button class="content-button status-button">
-                            Update
+                            Get Direction
                           </button>
                         </div>
                       </div>
                     </div>
+                    </div>
                   </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
+           
+        
+
         <div className="re">
           <Home />
         </div>
       </div>
+      <Modal show={showLoginModal}>
+        <p>Please log in to perform a search.</p>
+        {/* You can add login form or a link to the login page inside the modal */}
+        <div className="text-center" style={{borderRadius:"10px"}}>
+        <Link to={'/signin'}><Button onClick={() => setShowLoginModal(false)} variant="success">Login</Button></Link>
+        <Button onClick={() => setShowLoginModal(false)} variant="danger">Cancel</Button></div>
+        
+      </Modal>
     </div>
   );
 }

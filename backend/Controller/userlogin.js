@@ -1,5 +1,11 @@
 const User = require("../schemas/userSchema")
+const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
+const generateToken=(Email,role)=>{
+    return jwt.sign({Email,role},process.env.JWT_SECRET,{
+        expiresIn:'1d',
+    })
+} 
 const check=async(req,res)=>{
     const {Email,Password}=req.body
     const user=await User.findOne({Email})
@@ -8,15 +14,17 @@ const check=async(req,res)=>{
         const pass=await bcrypt.compare(Password, user.Password);
         if(pass)
         {
-            res.json("Login suceess"); 
+            token=generateToken(Email,user.role)
+            res.json({ success: true,token ,role: user.role});
+            
         }
         else{
-            res.json("Password Error"); 
+            res.json({message:"Password Error"}); 
         }
     }
     else{
-        res.json("No User Found");
+        res.json({message:"No User Found"});
        } 
-           
+        
 }
 module.exports=check

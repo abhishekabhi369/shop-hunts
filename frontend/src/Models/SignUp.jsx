@@ -56,24 +56,8 @@ const handleChange = (e) => {
   
   };
   return (
-    <div >
-       <div className="video-bg">
-        <video width="320" height="240" autoPlay muted loop>
-          <source
-            src="https://assets.codepen.io/3364143/7btrrd.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      <div className="main">
-        <div className="header">
-          <div className="menu-circle"></div>
-        </div>
-        <div className="wrapper">
-          <div className="main-container">
-            <div className="content-wrapper">
-              <div className="content-section"></div>
+    <div className='bg-black'>
+     
               <Modal
         isOpen={modalIsOpen}
         position='center'
@@ -87,7 +71,12 @@ const handleChange = (e) => {
         <Button color="gray" onClick={() => setModalIsOpen(false)}>Close</Button>
      
       </Modal>
-              <form  onSubmit={handleSubmit} autoComplete="off" className="form-signup pe-5 ps-5 pt-3 pt-3 pb-3 mt-4 ">
+      <div className="bg-black text-white">
+         <div className="menu-circle"></div>
+      <div className="main bg-black">
+       
+      <div className='form-signup'>
+              <form  onSubmit={handleSubmit} autoComplete="off" className="pe-5 ps-5 pt-3 pt-3 pb-3 mt-4 ">
         <h3>Register Here</h3>
 
         <label className='signup-label' htmlFor="username">Enter Your Email</label>
@@ -103,21 +92,20 @@ const handleChange = (e) => {
         <input className='signup-input'  type="textarea" name='Address' value={formData.Address} onChange={handleChange} placeholder="Enter Your Address" id="address"/>
         <label className='signup-label'>
           Role:
-          <select className='signup-input'  value={formData.role} name='role'  onChange={handleChange}>
-            <option  value="Admin">Admin</option>
-            <option value="Store">Store</option>
+          <select className='signup-input'  value={formData.role} name='role'  onChange={handleChange} disabled>
+           
             <option value="Consumer">Consumer</option>
           </select>
         </label>
         <button type="submit" className='signup-button'>Sign Up</button>
-        <p className="message">Already registered? <a href="#">Sign In</a></p>
+        <p className="message">Already registered? <Link to={'/signin'}><a href="#">Sign In</a></Link> </p>
     </form>
-   
+    </div> 
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
+            </div>
+          
   )
 }
 
