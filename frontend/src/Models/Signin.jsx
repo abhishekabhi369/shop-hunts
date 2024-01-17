@@ -31,6 +31,7 @@ function Signin() {
         },
       };
       const { Email, Password } = formData;
+      
       const value = await axios.post(
         "http://localhost:4001/login",
         { Email, Password },
@@ -38,30 +39,33 @@ function Signin() {
       );
 
       console.log(value.data, 999);
-
       if (value.data.success) {
         console.log("Login Success");
         localStorage.setItem("authToken", value.data.token);
         const accessToken=value?.data?.token;                       
         const role=value?.data?.role;  
-        console.log(Email,Password,role,accessToken,"values");    
+           const Name= value.data.Name
+        console.log(Name,role,accessToken,"values");    
         setAuth({
-          Email: value.data.Email,
-          Password: value.data.Password,
+          name:value.data.Name,
           role: value.data.role,
           accessToken: value.data.token,
         });
         
-        // console.log("required auth",auth);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-        // console.log(value,"value");
-        // console.log( value.data.token," value.data.token");
-        // if (value.data.role === "Admin") { 
+        console.log("required auth signin",auth);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    
+        if (role === "Admin") { 
         
-        //   navigate("/admin");
-        // } else {
-        //   navigate("/");
-        // }
-        navigate(from,{replace:true});
+          navigate("/admin");
+        }
+         if (role === "Store") { 
+        
+          navigate("/store");
+        } else {
+          
+          navigate("/");
+        }
+      
       } else {
         setError(value.data.message);
       }

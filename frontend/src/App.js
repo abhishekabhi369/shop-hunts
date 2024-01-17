@@ -4,6 +4,7 @@ import Home from './Models/Home';
 import Newsearch from './Models/Newsearch';
 import SignUp from './Models/SignUp';
 import Signin from './Models/Signin';
+import Store from './Models/Store.jsx/Store';
 
 
 import Unauthorize from './Models/Unauthorize';
@@ -25,10 +26,18 @@ function App() {
         <Route index element={<Newsearch/>}/>
         <Route path='/signin' element={<Signin/>}/>
         <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/admin' element={<AdminPanel/>}/>
         <Route path='/unauthorize' element={<Unauthorize/>}/>
-        {/* <Route element={<ProtectedRoute allowedRoles={["Admin"]} />}>
-      <Route path="/admin" element={<AdminPanel />} />
+        
+        <Route element={<RequireAuth allowedRoles={['Admin']} />}>
+                 <Route path="/admin" element={<AdminPanel />} />
+      </Route>
+      {/* <Route element={<ProtectedRoute allowedRoles={['Store']} />}>
+      <Route path="/store" element={<Store />} />
+      
+      </Route>
+      <Route element={<ProtectedRoute allowedRoles={['Consumer']} />}>
+      <Route path="/" element={<Newsearch />} />
+      
       </Route> */}
       </Route>
       </Routes>

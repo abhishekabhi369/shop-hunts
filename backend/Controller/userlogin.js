@@ -15,7 +15,7 @@ const check=async(req,res)=>{
         if(pass)
         {
             token=generateToken(Email,user.role)
-            res.json({ success: true,token ,role: user.role});
+            res.json({ success: true,token ,role: user.role,Name:user.Name});
             
         }
         else{
