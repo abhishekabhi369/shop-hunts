@@ -12,7 +12,7 @@ function Signin() {
   
   const navigate = useNavigate();
   const location=useLocation();
-  const from=location.state?.from?.pathname || "/";
+  const from=location.state?.from?.pathname || "/admin";
   const [formData, setFormData] = useState({
     Email: "",
     Password: "",
@@ -47,32 +47,29 @@ function Signin() {
            const Name= value.data.Name
         console.log(Name,role,accessToken,"values");    
         setAuth({
-          name:value.data.Name,
+          Name:value.data.Name,
           role: value.data.role,
           accessToken: value.data.token,
         });
-        
-        console.log("required auth signin",auth);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-    
-        if (role === "Admin") { 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        if (value.data.role === "Admin") { 
         
           navigate("/admin");
-        }
-         if (role === "Store") { 
-        
-          navigate("/store");
         } else {
-          
+          console.log('hi1');
           navigate("/");
         }
-      
+        // navigate(from,{replace:true});
       } else {
         setError(value.data.message);
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
     }
   };
+  console.log(auth,'auth here');
   const handleInputChange = () => {
     setError("");
   };
