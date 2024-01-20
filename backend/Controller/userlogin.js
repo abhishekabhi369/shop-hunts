@@ -7,24 +7,29 @@ const generateToken=(Email,role)=>{
     })
 } 
 const check=async(req,res)=>{
-    const {Email,Password}=req.body
-    const user=await User.findOne({Email})
-    if(user)
-    {
-        const pass=await bcrypt.compare(Password, user.Password);
-        if(pass)
+    try {
+        const {Email,Password}=req.body
+        const user=await User.findOne({Email})
+        if(user)
         {
-            token=generateToken(Email,user.role)
-            res.json({ success: true,token ,role: user.role,Name:user.Name});
-            
+            const pass=await bcrypt.compare(Password, user.Password);
+            if(pass)
+            {
+                token=generateToken(Email,user.role)
+                res.json({ success: true,token ,role: user.role,Name:user.Name});
+            }
+            else{
+                res.json({message:"Password Error"}); 
+            }
         }
         else{
-            res.json({message:"Password Error"}); 
-        }
+            res.json({message:"No User Found"});
+           } 
+            
+    } catch (error) {
+        console.error("Error fetching store list:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-    else{
-        res.json({message:"No User Found"});
-       } 
-        
+   
 }
 module.exports=check

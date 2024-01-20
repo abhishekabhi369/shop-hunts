@@ -3,34 +3,44 @@ import "./Newsearch.css";
 import Home from "./Home";
 import { Link } from 'react-router-dom'
 import { FaRegUser } from "react-icons/fa";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import axios from "axios";
 function Newsearch() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setsearch] = useState()
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [productName, setProductName] = useState('');
+  const [products,setProducts]=useState()
+
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     setIsLoggedIn(!!storedToken);
     
   }, []);
+  useEffect(() => {
+    console.log("products", products);
+  }, [products]);
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
   };
+  const openGoogleMaps = (latitude ,longitude) => {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+    window.open(url, '_blank');
+  };
 const searchProduct=async(event)=>{
   if(isLoggedIn){
-    console.log(`Searching `);
-  
-    console.log(productName,"Input");
     try {
-      
+      let productName=event.target.value
+      console.log(productName,"Input");
       const response = await axios.get(`http://localhost:4001/products/${productName}`);                                                                                              
-
-      const searchResults = response.data;
-      console.log(searchResults                                                                                                                                                                                                                                                                                                                                                                                                                        );
+      setProducts(response.data, () => {
+        console.log("products", products);
+      }); 
+        if(setProducts)
+        {
+            console.log("products",products);
+        } 
     } catch (error) {
       console.error('Error during search:', error);                                                             
     }
@@ -42,6 +52,9 @@ const searchProduct=async(event)=>{
   const borderStyle = {
     border: "1px solid #C75DEB",
   };
+  const sortedProducts = products
+  ? [...products].sort((a, b) => a.Price - b.Price)
+  : [];
   return (
     <div  className="bg-black" >
       
@@ -51,8 +64,7 @@ const searchProduct=async(event)=>{
               <div className="Navbars d-flex">
               <div className="menu-circle mt-4 "></div>
               <div className="search-bar mt-3">
-                <input type="text" placeholder="Search"  onChange={(e) =>{ setProductName(e.target.value)
-                searchProduct()}} />
+                <input type="text" placeholder="Search"  onChange={ searchProduct} />
               </div>
              
               <div className="header-profile mt-3">
@@ -65,9 +77,16 @@ const searchProduct=async(event)=>{
                     <div className="content-section-title text-white text-center mb-3" >
                    <h4>Stores Near You</h4> 
                     </div>
-                    <div className="stores-list d-flex flex-wrap">
-                    <div className="apps-card">
-                      <div className="app-card">
+                    <Container>
+                      <Row>
+                      <div className="stores-list d-flex flex-wrap">
+                      <div className="apps-card">
+                      {
+                        sortedProducts?.map((data)=>
+                        <Col md={4} sm={6} xs={12} key={data._id}>
+                         
+                  
+                      <div className="app-card ">
                         <span>
                           <svg viewBox="0 0 52 52" style={borderStyle}>
                             <g xmlns="http://www.w3.org/2000/svg">
@@ -83,19 +102,30 @@ const searchProduct=async(event)=>{
                               />
                             </g>
                           </svg>
-                          <h6>Stores Name</h6>
+                          <h6>{data.Store.Name}</h6>
                         </span>
-                        <div className="app-card__subtext d-flex ">
-                         <h6>Item Name-{`>`}</h6>  <h6>price</h6>
+                        <div className="app-card__subtext d-flex pt-3">
+                         <h6>{data.Name} -{`>`}</h6>  <h6>{data.Price}&#8377;</h6>
                         </div>
                         <div className  ="app-card-buttons">
-                          <button class="content-button status-button">
+                          <button class="content-button "
+                          onClick={() => openGoogleMaps(data.Store.Location.coordinates[0], data.Store.Location.coordinates[1])}>
                             Get Direction
                           </button>
                         </div>
                       </div>
-                    </div>
-                    </div>
+                    
+                    
+
+
+                        </Col>
+
+                        )
+                      }  
+                      </div>
+                      </div>
+                      </Row>
+                    </Container>
                   </div>
             </div>
            

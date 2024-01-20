@@ -137,7 +137,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    width: calc(45.3% - 20px);
+    width:100%;
     font-size: 16px;
     background-color: var(--content-bg);
     border-radius: 14px;

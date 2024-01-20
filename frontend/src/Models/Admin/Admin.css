@@ -22,7 +22,6 @@
 .items{
     display: flex;
   
-    height: min-content;
     gap: 30px;
 }
 .content{
@@ -35,3 +34,11 @@
     object-fit: contain;
 
 }
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .custom-row{
+    margin: 0;
+  }
