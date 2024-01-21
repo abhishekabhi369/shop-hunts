@@ -51,26 +51,7 @@ function App() {
       </Route>
       </Routes>
      
-      {/*    
-      <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Newsearch/>}/>
-        <Route path='/signin' element={<Signin/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/admin' element={<AdminPanel/>}/>
-      </Routes>
-      </BrowserRouter> */}
-         {/* <Route element={<ProtectedRoute allowedRoles={["Admin"]} />}>
-      <Route path="/admin" element={<AdminPanel />} />
-      </Route>
-
-      <Route element={<ProtectedRoute allowedRoles={["Store"]} />}>
-      <Route path="/store" element={<Store />} />
-      </Route>
-
-      <Route element={<ProtectedRoute allowedRoles={["Consumer"]} />}>
-      <Route path="/" element={<Newsearch  />} />
-      </Route> */}
+      
     </div>
   );
 }

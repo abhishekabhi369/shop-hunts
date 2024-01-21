@@ -31,14 +31,14 @@ function User() {
     }
   };
   return (
-    <div className='text-center'>
+    <div className='text-center bg-black'>
       <Container>
         <Row>    
            <div><h2>Users List</h2></div>
         </Row>
     <Row>
     <Col>      
-      <table>
+      <table className='table-date text-white'>
     <tr>
         <th>Name</th>
         <th>Email</th>
@@ -69,11 +69,7 @@ function User() {
     </table>
     </Col>
     </Row>
-      <Row className='text-center'>
-        <Col>
-        {/* <Button style={{color:'white',backgroundColor:"blue"}} variant="success" >Add User</Button> */}
-        </Col>
-      </Row>
+      
     </Container>
     </div>
   )

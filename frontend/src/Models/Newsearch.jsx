@@ -8,7 +8,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import axios from "axios";
 function Newsearch() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [search, setsearch] = useState()
+  const [search, setsearch] = useState('')
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [products,setProducts]=useState()
 
@@ -30,10 +30,15 @@ function Newsearch() {
   };
 const searchProduct=async(event)=>{
   if(isLoggedIn){
+    const searchTerm = event.target.value;
     try {
-      let productName=event.target.value
-      console.log(productName,"Input");
-      const response = await axios.get(`http://localhost:4001/products/${productName}`);                                                                                              
+      setsearch(searchTerm);
+      if (searchTerm.trim() === '') {
+        // If the search input is empty, clear the displayed products
+        setProducts([]);
+      } 
+      else{
+      const response = await axios.get(`http://localhost:4001/products/${search}`);                                                                                              
       setProducts(response.data, () => {
         console.log("products", products);
       }); 
@@ -41,11 +46,13 @@ const searchProduct=async(event)=>{
         {
             console.log("products",products);
         } 
+      }
     } catch (error) {
       console.error('Error during search:', error);                                                             
     }
   }
   else{
+    setProducts('')
     setShowLoginModal(true);
   }
 }

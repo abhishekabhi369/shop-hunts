@@ -12,6 +12,8 @@ const storeList = require('../Controller/Store/findAllStore')
 const deleteStore = require('../Controller/Store/deleteStore')
 const checkstore = require('../Controller/Store/storeLogin')
 const showstore = require('../Controller/Store/findStoreById')
+const findupdate = require('../Controller/Product/updateProduct')
+const deleteproduct = require('../Controller/Product/deleteProduct')
 const middleware=[protect]
 const  router=express.Router()
 
@@ -27,5 +29,6 @@ router.route('/delete/:id').delete(deleteuser)
 router.route("/findallstores").get(storeList)
 router.route('/deletestore/:id').delete(deleteStore)
 router.route("/findstorebyid/:id").get(showstore)
-
+router.route("/productedit/:id").put(findupdate)
+router.route('/deleteproduct/:id').delete(deleteproduct)
 module.exports=router

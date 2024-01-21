@@ -71,7 +71,8 @@ function Stores() {
     setShow(true);
   }
   const handleClose = () => {
-    setShow(false)};
+    setShow(false)
+  };
     const handleSubmit = async(event) => {
       event.preventDefault();
       try {
@@ -108,7 +109,7 @@ function Stores() {
         setShow(false);
     };
   return (
-    <div className="text-center">
+    <div className="text-center bg-black">
       <Container>
         <Row>
           <div>
@@ -117,7 +118,7 @@ function Stores() {
         </Row>
         <Row>
           <Col>
-            <table>
+            <table className='table-date w-75'>
               <thead>
                 <tr>
                   <th>Store Name</th>
