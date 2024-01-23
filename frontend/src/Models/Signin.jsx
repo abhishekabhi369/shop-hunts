@@ -1,18 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Signin.css";
 import SignUp from "./SignUp";
 import { Link, useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
+
 function Signin() {
   const { auth, setAuth } = useAuth();
   // const {setAuth } = useAuth();
   const [error, setError] = useState("");
-  
   const navigate = useNavigate();
   const location=useLocation();
-  const from=location.state?.from?.pathname || "/admin";
+  const from=location.state?.from?.pathname || "/";
+
   const [formData, setFormData] = useState({
     Email: "",
     Password: "",
@@ -37,7 +38,6 @@ function Signin() {
         { Email, Password },
         config
       );
-
       console.log(value.data, 999);
       if (value.data.success) {
         console.log("Login Success");
@@ -45,22 +45,19 @@ function Signin() {
         const accessToken=value?.data?.token;                       
         const role=value?.data?.role;  
            const Name= value.data.Name
-        console.log(Name,role,accessToken,"values");    
+        console.log(Name,role,accessToken,"valuesare hereeeee");    
         setAuth({
           Name:value.data.Name,
           role: value.data.role,
           accessToken: value.data.token,
-        });
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         if (value.data.role === "Admin") { 
         
           navigate("/admin");
         } else {
-          console.log('hi1');
-          navigate("/");
+          navigate("/home");
         }
-        // navigate(from,{replace:true});
+      
       } else {
         setError(value.data.message);
       }
@@ -69,7 +66,7 @@ function Signin() {
       console.log(error);
     }
   };
-  console.log(auth,'auth here');
+  // console.log(auth.role,'auth here');
   const handleInputChange = () => {
     setError("");
   };
@@ -125,6 +122,7 @@ function Signin() {
                     <a href="#">Sign Up</a>
                   </Link>{" "}
                 </p>
+                
               </form>
               </div>
               </div>

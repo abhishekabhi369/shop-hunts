@@ -23,7 +23,7 @@ function Home() {
     }
 
     function errorLocation() {
-      const center = [-2.24, 53.48]; // Default or fallback coordinates
+      const center = [-2.24, 53.48]; 
       setupMap(center);
       addMarker(center);
     }
@@ -49,19 +49,18 @@ function Home() {
     function addMarker(center) {
       const marker = new mapboxgl.Marker().setLngLat(center).addTo(map);
 
-      // Create a popup for the marker
+      
       const popup = new mapboxgl.Popup({ offset: 25 }).setHTML('You are here');
     
-      // Attach the popup to the marker and open it by default
       popup.addTo(map);
       marker.setPopup(popup);
     
-      // Change cursor to pointer on marker
+      
       marker.getElement().style.cursor = 'pointer';
     }
 
     return () => {
-      // Cleanup logic if needed
+
     };
   }, []);
 

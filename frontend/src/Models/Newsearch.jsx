@@ -34,7 +34,7 @@ const searchProduct=async(event)=>{
     try {
       setsearch(searchTerm);
       if (searchTerm.trim() === '') {
-        // If the search input is empty, clear the displayed products
+
         setProducts([]);
       } 
       else{
@@ -144,9 +144,9 @@ const searchProduct=async(event)=>{
       </div>
       <Modal show={showLoginModal}>
         <p>Please log in to perform a search.</p>
-        {/* You can add login form or a link to the login page inside the modal */}
+       
         <div className="text-center" style={{borderRadius:"10px"}}>
-        <Link to={'/signin'}><Button onClick={() => setShowLoginModal(false)} variant="success">Login</Button></Link>
+        <Link to={'/'}><Button onClick={() => setShowLoginModal(false)} variant="success">Login</Button></Link>
         <Button onClick={() => setShowLoginModal(false)} variant="danger">Cancel</Button></div>
         
       </Modal>

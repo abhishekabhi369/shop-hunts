@@ -7,8 +7,7 @@ const getdata=async(req,res)=>{
         const getuser=await Store.findById({_id:userid})
         res.json(getuser)
     } catch (error) {
-        console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ error: "Error" });
     }
   
 }

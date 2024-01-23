@@ -13,8 +13,8 @@ const storeList = async (req, res) => {
 
       res.json({ store: storeDetails });
   } catch (error) {
-      console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+   
+      res.json({ error: "Internal Server Error" });
   }
 };
 module.exports=storeList

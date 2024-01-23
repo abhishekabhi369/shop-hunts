@@ -58,7 +58,7 @@ function StoreAdminPanel() {
     console.log("products Details", productitem);
   }, [productitem]); 
   
-  const fetchData = () => {
+  const fetchData = () => { 
     try {
       const decodedToken = jwtDecode(token);
       setStoreId(decodedToken);

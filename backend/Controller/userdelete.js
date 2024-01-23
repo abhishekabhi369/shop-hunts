@@ -7,8 +7,7 @@ const deleteuser=async(req,res)=>{
     const getuser=await User.deleteOne({_id})
     res.json(getuser)
   } catch (error) {
-    console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ error: "Error" });
   }
    
 }

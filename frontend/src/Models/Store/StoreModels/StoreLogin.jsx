@@ -1,15 +1,21 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate,useLocation } from "react-router-dom";
+import useAuth from '../../../hooks/useAuth';
 function StoreLogin() {
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location=useLocation();
+  const from=location.state?.from?.pathname || "/storelogin";
+
     const [error, setError] = useState("");
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         Name: "",
         Password: "",
       });
       const handleChange = (e) => {
         const { name, value } = e.target;
+        
         setFormData({ ...formData, [name]: value });
       };
       const handleInputChange = () => {
@@ -41,8 +47,18 @@ function StoreLogin() {
             const role=value?.data?.role;  
                const Name= value.data.Name
             console.log(Name,role,accessToken,"values");    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-            navigate('/store')
+            setAuth({
+              Name:value.data.Name,
+              role: value.data.role,
+              accessToken: value.data.token,
+            }); 
+            if (value.data.role === "Store") { 
+        
+              navigate("/store");
+            } else {
+              navigate("/unauthorize");
+            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+            navigate(from,{replace:true});
             // navigate(from,{replace:true});
           } else {
             setError(value.data.message);
@@ -63,7 +79,7 @@ function StoreLogin() {
                 autoComplete="off"
                 className="pe-5 ps-5 pt-3 pb-5 "
               >
-                <h3>Login Here</h3>
+                <h3>Store Login</h3>
 
                 <label className="signin-label" htmlFor="username">
                   Name

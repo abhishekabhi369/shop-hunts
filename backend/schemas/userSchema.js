@@ -5,7 +5,7 @@ const userschema=mongoose.Schema({
     Password:{type:String},
     MobNumber:{type:String},
     Address:{type:String},
-    role: { type: String, enum: ['Admin', 'Store', 'Consumer'], required: true }
+    role: { type: String, enum: ['Admin','Consumer'], required: true }
 })
 const User=mongoose.model('user',userschema)
 module.exports=User

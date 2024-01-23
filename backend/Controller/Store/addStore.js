@@ -17,8 +17,7 @@ const addStore=async(req,res)=>{
         })
         res.json({storedetails})
     } catch (error) {
-        console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ error: "Error" });
     }
   
 }

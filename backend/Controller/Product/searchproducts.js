@@ -13,8 +13,7 @@ const getitemsname=async(req,res)=>{
     }).populate('Store')
     res.json(product)
    } catch (error) {
-    console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "Error" });
    }
 
 }

@@ -14,8 +14,7 @@ const addProducts=async(req,res)=>{
      );
     res.json({productdetails})
     } catch (error) {
-        console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ error: "Error" });
     }
 }
 module.exports=addProducts

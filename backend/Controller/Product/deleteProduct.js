@@ -8,8 +8,7 @@ const deleteproduct=async(req,res)=>{
     await Store.updateOne({Products: productId},{ $pull: { Products: productId } })
    res.json({ message: "Products deleted successfully" });
   } catch (error) {
-    console.error("Error fetching store list:", error);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ error: "Error" });
   }
    
 }
