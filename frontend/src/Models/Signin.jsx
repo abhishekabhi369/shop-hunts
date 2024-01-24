@@ -14,24 +14,24 @@ function Signin() {
   const location=useLocation();
   const from=location.state?.from?.pathname || "/";
 
-  const [formData, setFormData] = useState({
+  const [inputData, setInputData] = useState({
     Email: "",
     Password: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setInputData({ ...inputData, [name]: value });
   };
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    console.log(inputData);
     try {
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
-      const { Email, Password } = formData;
+      const { Email, Password } = inputData;
       
       const value = await axios.post(
         "http://localhost:4001/login",
@@ -93,7 +93,7 @@ function Signin() {
                   onChange={handleChange}
                   onFocus={handleInputChange}
                   required
-                  value={formData.Email}
+                  value={inputData.Email}
                   name="Email"
                 />
 
@@ -107,7 +107,7 @@ function Signin() {
                   onChange={handleChange}
                   onFocus={handleInputChange}
                   required
-                  value={formData.Password}
+                  value={inputData.Password}
                   name="Password"
                 />
                 {error && (
@@ -122,7 +122,6 @@ function Signin() {
                     <a href="#">Sign Up</a>
                   </Link>{" "}
                 </p>
-                
               </form>
               </div>
               </div>

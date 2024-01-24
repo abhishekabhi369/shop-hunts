@@ -55,7 +55,7 @@ function User() {
                       <td>{user.MobNumber}</td>
                       <td>{user.Address}</td>
                       <td>
-                        {/* You can add the desired action for 'Consumer' role here */}
+        
                         <Button
                           style={{ color: 'white', backgroundColor: 'blue' }}
                           variant='success'

@@ -6,7 +6,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 function SignUp() {
   const [error,setError]=useState('')
-  const [formData, setFormData] = useState({
+  const [inputData, setInputData] = useState({
         
     Name: '',
     Password: '',
@@ -21,8 +21,8 @@ const handleChange = (e) => {
 
   const { name, value } = e.target;
 
-  setFormData({
-    ...formData,
+  setInputData({
+    ...inputData,
     [name]: value
   });
 
@@ -37,7 +37,7 @@ const handleChange = (e) => {
           "Content-type":"application/json"
         }
       }
-      const { Name, Email, Password, MobNumber, Address, role }=formData
+      const { Name, Email, Password, MobNumber, Address, role }=inputData
       const value=await axios.post('http://localhost:4001/signup',{Name, Email, Password, MobNumber, Address, role},config)
       console.log('User signed up successfully:', value.data);
       setModalIsOpen(true);
@@ -47,8 +47,8 @@ const handleChange = (e) => {
     }
 
    
-    console.log('Signup data:', formData);
-    setFormData({ Name: '',
+    console.log('Signup data:', inputData);
+    setInputData({ Name: '',
     Password: '',
     Email: '',
     MobNumber: '',
@@ -68,7 +68,7 @@ const handleChange = (e) => {
         <h4>Account Created Successfully!</h4>
         <p>Your account has been created. You can now log in.</p>
         
-      <Link to={'/signin'}> <Button className='pe-4' onClick={() => setModalIsOpen(false)}>Login</Button></Link> 
+      <Link to={'/'}> <Button className='pe-4' onClick={() => setModalIsOpen(false)}>Login</Button></Link> 
         <Button color="gray" onClick={() => setModalIsOpen(false)}>Close</Button>
      
       </Modal>
@@ -81,19 +81,19 @@ const handleChange = (e) => {
         <h3>Register Here</h3>
 
         <label className='signup-label' htmlFor="username">Enter Your Email</label>
-        <input className='signup-input' name='Email' type="text" placeholder="Email"   value={formData.Email}   onChange={handleChange} required />
+        <input className='signup-input' name='Email' type="text" placeholder="Email"   value={inputData.Email}   onChange={handleChange} required />
 
         <label className='signup-label' htmlFor="password">Password</label>
-        <input className='signup-input' name='Password' value={formData.Password} type="password" placeholder="Enter Your Password"  onChange={handleChange} required/>
+        <input className='signup-input' name='Password' value={inputData.Password} type="password" placeholder="Enter Your Password"  onChange={handleChange} required/>
         <label  className='signup-label' htmlFor="name">Name</label>
-        <input  className='signup-input' type="text" name='Name' value={formData.Name} onChange={handleChange} placeholder="Enter Your Name" />
+        <input  className='signup-input' type="text" name='Name' value={inputData.Name} onChange={handleChange} placeholder="Enter Your Name" />
         <label className='signup-label' htmlFor="mob-number">Mobile Number</label>
-        <input className='signup-input' type="text"  onChange={handleChange} name='MobNumber' placeholder="Enter Your Number" value={formData.MobNumber} required/>
+        <input className='signup-input' type="text"  onChange={handleChange} name='MobNumber' placeholder="Enter Your Number" value={inputData.MobNumber} required/>
         <label className='signup-label' htmlFor="address">Address</label>
-        <input className='signup-input'  type="textarea" name='Address' value={formData.Address} onChange={handleChange} placeholder="Enter Your Address" id="address" required/>
+        <input className='signup-input'  type="textarea" name='Address' value={inputData.Address} onChange={handleChange} placeholder="Enter Your Address" id="address" required/>
         {/* <label className='signup-label'>
           Role:
-          <select className='signup-input'  value={formData.role} name='role'  onChange={handleChange} disabled>
+          <select className='signup-input'  value={inputData.role} name='role'  onChange={handleChange} disabled>
            
             <option value="Consumer">Consumer</option>
           </select>

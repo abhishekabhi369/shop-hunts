@@ -7,14 +7,14 @@ import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import axios from "axios";
 function Newsearch() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [login, setlogin] = useState(false);
   const [search, setsearch] = useState('')
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [products,setProducts]=useState()
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
-    setIsLoggedIn(!!storedToken);
+    setlogin(!!storedToken);
     
   }, []);
   useEffect(() => {
@@ -22,14 +22,14 @@ function Newsearch() {
   }, [products]);
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    setIsLoggedIn(false);
+    setlogin(false);
   };
   const openGoogleMaps = (latitude ,longitude) => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
     window.open(url, '_blank');
   };
 const searchProduct=async(event)=>{
-  if(isLoggedIn){
+  if(login){
     const searchTerm = event.target.value;
     try {
       setsearch(searchTerm);
@@ -76,9 +76,9 @@ const searchProduct=async(event)=>{
              
               <div className="header-profile mt-3">
                
-                {isLoggedIn ? null : <Link to={'/signin'}> <div className="profile-img"><FaRegUser /></div> </Link>}
+                {login ? null : <Link to={'/signin'}> <div className="profile-img"><FaRegUser /></div> </Link>}
               </div>
-              {isLoggedIn ? <div className="Log-out text-white" onClick={handleLogout}><RiLogoutBoxLine color="white" />logout</div> : null}
+              {login ? <div className="Log-out text-white" onClick={handleLogout}><RiLogoutBoxLine color="white" />logout</div> : null}
             </div>
             <div className="content-section">
                     <div className="content-section-title text-white text-center mb-3" >

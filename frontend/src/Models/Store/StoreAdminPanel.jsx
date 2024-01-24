@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 function StoreAdminPanel() {
   const [token,setToken]=useState()
   const [storeId, setStoreId] = useState({ id: null });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [login, setLogin] = useState(false);
   const [storedata,setStoreData]=useState()
   const navi=useNavigate()
   const [show, setShow] = useState(false);
@@ -37,7 +37,7 @@ function StoreAdminPanel() {
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     setToken(storedToken);
-    setIsLoggedIn(!!storedToken);
+    setLogin(!!storedToken);
   }, []);
   // console.log("Token",token);
     useEffect(() => {
@@ -67,7 +67,7 @@ function StoreAdminPanel() {
     }
   };
   const fetchStore= async(ID)=>{
-    if(isLoggedIn){
+    if(login){
     try {
       const response =await axios.get(
         `http://localhost:4001/findstorebyid/${ID}`);

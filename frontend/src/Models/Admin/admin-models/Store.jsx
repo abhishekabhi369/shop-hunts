@@ -142,7 +142,6 @@ function Stores() {
                       </ul>
                     </td>
                     <td>
-                      {/* Pass the store's ID to the handleDelete function */}
                       <Button
                         style={{ color: 'white' }}
                         variant='danger'
