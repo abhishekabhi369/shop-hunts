@@ -76,7 +76,7 @@ const searchProduct=async(event)=>{
              
               <div className="header-profile mt-3">
                
-                {login ? null : <Link to={'/signin'}> <div className="profile-img"><FaRegUser /></div> </Link>}
+                {login ? null : <Link to={'/'}> <div className="profile-img"><FaRegUser /></div> </Link>}
               </div>
               {login ? <div className="Log-out text-white" onClick={handleLogout}><RiLogoutBoxLine color="white" />logout</div> : null}
             </div>

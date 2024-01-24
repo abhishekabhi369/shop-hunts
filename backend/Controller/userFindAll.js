@@ -4,8 +4,7 @@ const User = require("../schemas/userSchema")
 const userList=async(req,res)=>{
   try {
     const user=await User.find()
-    const userDetails = user.map(user => ({
-        id:user._id,
+    const userDetails = user.map(user => ({ id:user._id,
         Name: user.Name,
         Email: user.Email,
         MobNumber: user.MobNumber,
