@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Newsearch.css";
 import Home from "./Home";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaRegUser } from "react-icons/fa";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { RiLogoutBoxLine } from "react-icons/ri";
@@ -11,7 +11,7 @@ function Newsearch() {
   const [search, setsearch] = useState('')
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [products,setProducts]=useState()
-
+  const navigate = useNavigate();
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     setlogin(!!storedToken);
@@ -23,6 +23,7 @@ function Newsearch() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setlogin(false);
+    navigate("/");
   };
   const openGoogleMaps = (latitude ,longitude) => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
@@ -64,12 +65,15 @@ const searchProduct=async(event)=>{
   : [];
   return (
     <div  className="bg-black" >
-      
+         <Container>
+         <Row>
       <div className="le-re">
         <div className="le">
-        
+             
+                <Col>
               <div className="Navbars d-flex">
               <div className="menu-circle mt-4 "></div>
+              
               <div className="search-bar mt-3">
                 <input type="text" placeholder="Search"  onChange={ searchProduct} />
               </div>
@@ -80,12 +84,14 @@ const searchProduct=async(event)=>{
               </div>
               {login ? <div className="Log-out text-white" onClick={handleLogout}><RiLogoutBoxLine color="white" />logout</div> : null}
             </div>
+            </Col>
+            
             <div className="content-section">
                     <div className="content-section-title text-white text-center mb-3" >
                    <h4>Stores Near You</h4> 
                     </div>
-                    <Container>
-                      <Row>
+                 
+                    
                       <div className="stores-list d-flex flex-wrap">
                       <div className="apps-card">
                       {
@@ -111,8 +117,11 @@ const searchProduct=async(event)=>{
                           </svg>
                           <h6>{data.Store.Name}</h6>
                         </span>
-                        <div className="app-card__subtext d-flex pt-3">
+                        <div className="app-card__subtext d-flex flex-column pt-3">
+                          <h6>{data.Description}</h6> 
+                          <div className="d-flex">
                          <h6>{data.Name} -{`>`}</h6>  <h6>{data.Price}&#8377;</h6>
+                         </div>
                         </div>
                         <div className  ="app-card-buttons">
                           <button class="content-button "
@@ -121,9 +130,6 @@ const searchProduct=async(event)=>{
                           </button>
                         </div>
                       </div>
-                    
-                    
-
 
                         </Col>
 
@@ -131,22 +137,27 @@ const searchProduct=async(event)=>{
                       }  
                       </div>
                       </div>
-                      </Row>
-                    </Container>
+                    
+                   
                   </div>
             </div>
            
         
-
-        <div className="re">
+            <Col md={4} sm={6} xs={12} >
+        <div className="re ms-5">
+       
           <Home />
         </div>
+        </Col>
       </div>
+      </Row>
+      </Container>
+        {/* //lere */}
       <Modal show={showLoginModal}>
         <p>Please log in to perform a search.</p>
        
         <div className="text-center" style={{borderRadius:"10px"}}>
-        <Link to={'/'}><Button onClick={() => setShowLoginModal(false)} variant="success">Login</Button></Link>
+        <Link to={'/signin'}><Button onClick={() => setShowLoginModal(false)} variant="success">Login</Button></Link>
         <Button onClick={() => setShowLoginModal(false)} variant="danger">Cancel</Button></div>
         
       </Modal>

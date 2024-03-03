@@ -174,7 +174,7 @@ try {
 }
 
 const modalshow= (product)=>{
-  // console.log(product,"produc");
+  console.log(product,"produc");
   console.log(product.Description,878778);
       setProductItem({...productitem,id:product._id ,Description: product.Description,
         Name:product.Name,
@@ -303,7 +303,7 @@ const handleLogout = () => {
             Close
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
+            Add Product
           </Button>
         </Modal.Footer>
       </Modal>

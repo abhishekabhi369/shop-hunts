@@ -174,11 +174,11 @@ function Stores() {
         <Modal.Body>
          
         <label  className='signup-label' htmlFor="name">Name</label>
-        <input  autoComplete="off"  className='signup-input modal-in' type="text" name='Name' value={formData.Name} onChange={handleChange} placeholder="Enter Your Name" />
+        <input  autoComplete="off"  className='signup-input modal-in' type="text" name='Name' value={formData.Name} onChange={handleChange} placeholder="Enter Store Name" />
         <label className='signup-label' htmlFor="password">Password</label>
-        <input  autoComplete="off"  className='signup-input modal-in' name='Password' value={formData.Password} type="password" placeholder="Enter Your Password"  onChange={handleChange} />
+        <input  autoComplete="off"  className='signup-input modal-in' name='Password' value={formData.Password} type="password" placeholder=" Password"  onChange={handleChange} />
         <label className='signup-label' htmlFor="mob-number">Mobile Number</label>
-        <input  autoComplete="off"  className='signup-input modal-in' type="text"  onChange={handleChange} name='Mobile' placeholder="Enter Your Number" value={formData.Mobile}/>
+        <input  autoComplete="off"  className='signup-input modal-in' type="text"  onChange={handleChange} name='Mobile' placeholder="Mobile Number" value={formData.Mobile}/>
         <label  className='signup-label' htmlFor="location">Location</label>
         <input  autoComplete="off"  className='signup-input modal-in w-50'  type="text" name='Location.coordinates[0]' value={formData.Location.coordinates[0]} onChange={handleChange} placeholder="latitude"/>
         <input  autoComplete="off"  className='signup-input text-dark modal-in w-50'  type="text" name='Location.coordinates[1]' value={formData.Location.coordinates[1]} onChange={handleChange} placeholder="longitude" />           

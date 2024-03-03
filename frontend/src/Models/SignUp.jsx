@@ -20,7 +20,38 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 const handleChange = (e) => {
 
   const { name, value } = e.target;
-
+  if (name === "Name" && !value.trim()) {
+    setError("Name is required")
+  }
+  if (name === "Name" && value.trim()) {
+    setError("")
+  }
+  if (name === "Password" && !value.trim()) {
+    setError("Password is required")
+  }
+  if (name === "Password" && value.trim()) {
+    setError("")
+  }
+ 
+  if (name === "Email") {
+    const emailRegex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!value.trim() || !emailRegex.test(value)) {
+      setError("Enter a valid email address")
+    }
+    if (!value.trim() || emailRegex.test(value)) {
+      setError("")
+    }
+  }
+  if(name==="MobNumber")
+  {
+    const phoneno = /^\d{10}$/
+    if (!value.trim() || !phoneno.test(value)) {
+      setError("Enter a valid Mobile number")
+    }
+    if (!value.trim() || phoneno.test(value)) {
+      setError("")
+    }
+  }
   setInputData({
     ...inputData,
     [name]: value
@@ -32,6 +63,26 @@ const handleChange = (e) => {
     event.preventDefault();
   
     try {
+      const emailRegex =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!inputData.Email || !emailRegex.test(inputData.Email)) {
+      setError('Enter a valid email address');
+      return;
+    }
+    if (!inputData.Name.trim()) {
+      setError('Name is required');
+      return;
+    }
+    if (!inputData.Password.trim()) {
+      setError('Password is required');
+      return;
+    }
+     const phoneno = /^\d{10}$/;
+    if (!inputData.MobNumber || !phoneno.test(inputData.MobNumber)) {
+      setError('Enter a valid Mobile number');
+      return;
+    }
+  
+    setError('');
       const config={
         headers:{
           "Content-type":"application/json"
@@ -68,7 +119,7 @@ const handleChange = (e) => {
         <h4>Account Created Successfully!</h4>
         <p>Your account has been created. You can now log in.</p>
         
-      <Link to={'/'}> <Button className='pe-4' onClick={() => setModalIsOpen(false)}>Login</Button></Link> 
+      <Link to={'/signin'}> <Button className='pe-4' onClick={() => setModalIsOpen(false)}>Login</Button></Link> 
         <Button color="gray" onClick={() => setModalIsOpen(false)}>Close</Button>
      
       </Modal>

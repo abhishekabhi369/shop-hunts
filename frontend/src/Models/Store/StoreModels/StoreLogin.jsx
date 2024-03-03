@@ -6,7 +6,7 @@ function StoreLogin() {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const location=useLocation();
-  const from=location.state?.from?.pathname || "/storelogin";
+  const from=location.state?.from?.pathname || "/store";
 
     const [error, setError] = useState("");
     const [formData, setFormData] = useState({

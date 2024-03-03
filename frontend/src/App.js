@@ -1,4 +1,5 @@
 import AdminPanel from './Models/Admin/AdminPanel';
+import Landing from './Models/Landing';
 import Layout from './Models/Layout';
 import Newsearch from './Models/Newsearch';
 import PageNofound from './Models/PageNofound';
@@ -20,10 +21,12 @@ function App() {
     <div className="App">
      
       <Routes>
-      <Route path='/' element={<Layout/>}>
+      <Route path='/' element={<Layout/>}> 
         {/* Public */}
         {/* <Route path='/' element={<Newsearch/>}/>  */}
-        <Route path='/' element={<Signin/>}/>
+        <Route path='/' element={<Landing/>}/>
+        
+       <Route path='/signin' element={<Signin/>}/> 
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/unauthorize' element={<Unauthorize/>}/>
         <Route path='/storelogin' element={<StoreLogin/>}/> 
@@ -42,7 +45,7 @@ function App() {
       </Route>
       </Routes>
      
-      
+      {/* <Landing/> */}
     </div>
   );
 }

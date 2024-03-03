@@ -7,7 +7,7 @@ const addStore=async(req,res)=>{
         if(getstore)
         {
             console.log("Store Exits");
-           return res.json({ message: "Store already exists." }); 
+           return res.json({ error: "Store already exists." }); 
           
         }
         const salt=await bcrypt.genSalt(10)
